@@ -1,0 +1,20 @@
+.productList {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width:1200px) {
+    .productList{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .productList{
+        grid-template-columns: repeat(2,1fr);
+    }
+}

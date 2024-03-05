@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const Product = () => {
+import Image from 'next/image'
+import { ProductType } from '@/resources'
+
+const Product:FC<{product:ProductType}> = ({product}) => {
+
+    const {title,price,category,image,} = product;
   return (
-    <div>Product</div>
+    <div>
+        <img src={image} alt={title} height={'70%'} width={'100%'}/>
+        <p>{title}</p>
+    </div>
   )
 }
 
