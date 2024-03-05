@@ -1,0 +1,1 @@
+export {default as ProductDiscoverySection} from './ProductDiscoverySection';
