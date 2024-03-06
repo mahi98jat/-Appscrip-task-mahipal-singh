@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -18,9 +17,26 @@
   flex-direction: row;
 }
 
-
-.productSection{
+.productSection {
   height: 100%;
-  border:1px solid red;
-  overflow-y: auto;
+}
+
+@media screen and (max-width: 1248px) {
+  .productList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .productBody {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 702px) {
+  .productList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.filterWrapper {
+  position: relative;
 }

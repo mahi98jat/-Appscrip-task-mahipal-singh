@@ -1,6 +1,7 @@
+import React, { FC } from "react";
+
 import Link from "next/link";
-import React from "react";
-import styles from './Links.module.css';
+import styles from "./Links.module.css";
 
 const links = [
   { name: "SHOP", path: "/" },
@@ -9,7 +10,7 @@ const links = [
   { name: "ABOUT", path: "/about" },
   { name: "CONTACT US", path: "/contact" },
 ];
-const Links = () => {
+const Links: FC<{ layout: "horizontal" | "vertical" }> = ({ layout }) => {
   const LinkMapper = links.map((val, index) => (
     <li>
       <Link key={index} href={val?.path}>
@@ -20,8 +21,11 @@ const Links = () => {
 
   return (
     <nav>
-      <ul className={styles.links}>
-       {LinkMapper}
+      <ul
+        className={styles.links}
+        style={{ flexDirection: `${layout === "vertical" ? "column" : "row"}` }}
+      >
+        {LinkMapper}
       </ul>
     </nav>
   );

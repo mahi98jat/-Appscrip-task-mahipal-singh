@@ -1,9 +1,9 @@
 "use client";
 
-import { Dropdown, FilterColumns, Flex, Product } from "..";
+import { Dropdown, FilterColumns, Flex, Product, SideDrawer } from "..";
+import { FilterTypes, ProductType, useWindowWidth } from "@/resources";
 import React, { FC, useEffect, useState } from "react";
 
-import { ProductType } from "@/resources";
 import { data } from "./data";
 import styles from "./ProductList.module.css";
 
@@ -24,13 +24,22 @@ const ProductList: FC = () => {
     getProducts();
   }, []);
 
+  const width = useWindowWidth();
+
   return (
     <section className={styles.productSection}>
-      <Flex justify="flex-end">
+      <Flex
+        justify={`${
+          width !== 0 && width < 1248 ? "space-between" : "flex-end"
+        }`}
+      >
+        {width !== 0 && width < 1248 && <FilterWrapper filters={data} />}
         <Dropdown sorts={["a", "b"]} onSelect={() => {}} />
       </Flex>
       <section className={styles.productBody}>
-        <FilterColumns filters={data} />
+      {width !== 0 && width >= 1248 && <FilterColumns filters={data} />}
+
+        
         <div style={{ flex: 1 }}>
           <div className={styles.productList}>
             {products.map((product) => (
@@ -40,6 +49,19 @@ const ProductList: FC = () => {
         </div>
       </section>
     </section>
+  );
+};
+
+const FilterWrapper: FC<{ filters: FilterTypes[] }> = ({ filters }) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  return (
+    <div className={styles.filterWrapper}>
+      <div onClick={() => setIsVisible(true)}>show filters</div>
+      <SideDrawer show={isVisible}  onClose={()=>setIsVisible(false)}>
+        <FilterColumns filters={filters} />
+      </SideDrawer>
+    </div>
   );
 };
 

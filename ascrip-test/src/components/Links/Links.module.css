@@ -1,7 +1,15 @@
 .links {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   gap: 10px;
   align-items: center;
   list-style: none;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
 }

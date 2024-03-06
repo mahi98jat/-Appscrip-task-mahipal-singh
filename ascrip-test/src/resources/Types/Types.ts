@@ -6,3 +6,8 @@ export interface ProductType {
   description: string;
   image: string;
 }
+
+export interface FilterTypes {
+  category: string;
+  options: { value: string; label: string }[];
+}

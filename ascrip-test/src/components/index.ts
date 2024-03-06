@@ -10,3 +10,4 @@ export * from "./ProductList";
 export * from "./Flex";
 export * from "./Dropdown";
 export * from "./FilterColumns";
+export * from './SideDrawer'

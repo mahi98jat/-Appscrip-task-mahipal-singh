@@ -2,6 +2,7 @@
 
 import React, { FC, useState } from "react";
 
+import { FilterTypes } from "@/resources";
 import styles from "./FilterColumns.module.css";
 
 const FilterColumn: FC<{
@@ -18,10 +19,7 @@ const FilterColumn: FC<{
   );
 };
 
-interface FilterTypes {
-  category: string;
-  options: { value: string; label: string }[];
-}
+
 
 const FilterSection: FC<{
   filter: FilterTypes;
