@@ -10,7 +10,7 @@ const Heading: FC<{ type: "primary" | "secondary"; label: string }> = ({
     primary: <h1>{label}</h1>,
     secondary: <h2>{label}</h2>,
   };
-  return <div className="heading-container">{tags[type]}</div>;
+  return tags[type];
 };
 
 export default Heading;

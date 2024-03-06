@@ -1,54 +1,56 @@
-'use client'
-
-import './FilterColumns.module.css';
+"use client";
 
 import React, { FC, useState } from "react";
+
+import styles from "./FilterColumns.module.css";
 
 const FilterColumn: FC<{
   filters: { category: string; options: { label: string; value: string }[] }[];
 }> = ({ filters }) => {
-  const [expandedSections, setExpandedSections] = useState<Record<string,boolean>>({});
-
-  const toggleSection = (section: string) => {
-    setExpandedSections((prevState) => ({
-      ...prevState,
-      [section]: Boolean(prevState[section]),
-    }));
-  };
-
-  const handleCheckboxChange = (section:string,val:string) => {
-    // console.log(`Filter selected: ${section} - ${option}`);
-    // Here you would manage the selection state or directly apply the filter
-  };
+  const handleCheckboxChange = (section: string, val: string) => {};
 
   return (
-    <div className="filterColumn" >
+    <div className={styles.filterColumn}>
       {filters.map((filter) => (
-        <div key={filter.category} className="filterSection">
-          <div
-            className="filterTitle"
-            onClick={() => toggleSection(filter.category)}
-          >
-            {filter.category}
-          </div>
-          {expandedSections[filter.category] && (
-            <div className="filterOptions">
-              {filter.options.map((option) => (
-                <label key={option.value}>
-                  <input
-                    type="checkbox"
-                    value={option.value}
-                    onChange={() =>
-                      handleCheckboxChange(filter.category, option.value)
-                    }
-                  />
-                  {option.label}
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
+        <FilterSection filter={filter} onFilterSelect={handleCheckboxChange} />
       ))}
+    </div>
+  );
+};
+
+interface FilterTypes {
+  category: string;
+  options: { value: string; label: string }[];
+}
+
+const FilterSection: FC<{
+  filter: FilterTypes;
+  onFilterSelect: (category: string, val: string) => void;
+}> = ({ filter, onFilterSelect }) => {
+  const [isExpand, setIsExpand] = useState<boolean>(false);
+
+  return (
+    <div key={filter.category} className={styles.filterSection}>
+      <div
+        className={styles.filterTitle}
+        onClick={() => setIsExpand(!isExpand)}
+      >
+        {filter.category}
+      </div>
+      {isExpand && (
+        <div className={styles.filterOptions}>
+          {filter.options.map((option) => (
+            <label key={option.value}>
+              <input
+                type="checkbox"
+                value={option.value}
+                onChange={() => onFilterSelect(filter.category, option.value)}
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

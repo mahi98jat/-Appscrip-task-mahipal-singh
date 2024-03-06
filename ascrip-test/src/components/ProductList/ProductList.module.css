@@ -3,14 +3,17 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   overflow-y: auto;
-  border: 1px solid red;
 }
 
+@media screen and (max-width: 768px) {
+  .productList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-
-
-@media screen and (max-width:768px) {
-    .productList{
-        grid-template-columns: repeat(2,1fr);
-    }
+.productBody {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-direction: row;
 }

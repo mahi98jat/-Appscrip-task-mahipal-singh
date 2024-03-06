@@ -11,9 +11,11 @@ const Dropdown: FC<{ sorts: string[]; onSelect: (val: string) => void }> = ({
       onChange={(e) => onSelect(e.target.value)}
       className={styles.sortsDropdown}
     >
-      <option value="">Select a Category</option>
+      <option className={styles.option} value="">
+        Select a Category
+      </option>
       {sorts.map((sort, index) => (
-        <option key={index} value={sort}>
+        <option className={styles.option} key={index} value={sort}>
           {sort}
         </option>
       ))}

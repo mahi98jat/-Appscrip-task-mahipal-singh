@@ -4,6 +4,7 @@ import { Dropdown, FilterColumns, Flex, Product } from "..";
 import React, { FC, useEffect, useState } from "react";
 
 import { ProductType } from "@/resources";
+import {data} from './data';
 import styles from "./ProductList.module.css";
 
 async function fetchProducts() {
@@ -11,22 +12,7 @@ async function fetchProducts() {
   return res.json();
 }
 
-const filtersData = [
-  {
-    category: "Brand",
-    options: [
-      { value: "brand1", label: "Brand 1" },
-      { value: "brand2", label: "Brand 2" },
-    ],
-  },
-  {
-    category: "Color",
-    options: [
-      { value: "red", label: "Red" },
-      { value: "blue", label: "Blue" },
-    ],
-  },
-];
+  
 
 const ProductList: FC<{
   // data: ProductType[]
@@ -43,18 +29,20 @@ const ProductList: FC<{
   }, []);
 
   return (
-    <section >
+    <section>
       <Flex justify="flex-end">
         <Dropdown sorts={["a", "b"]} onSelect={() => {}} />
       </Flex>
-      <Flex justify="flex-start" >
-        <FilterColumns filters={filtersData} />
-        <div className={styles.productList}>
-          {products.map((product) => (
-            <Product key={product.id} product={product} />
-          ))}
+      <section className={styles.productBody}>
+        <FilterColumns filters={data} />
+        <div style={{ flex: 1 }}>
+          <div className={styles.productList}>
+            {products.map((product) => (
+              <Product key={product.id} product={product} />
+            ))}
+          </div>
         </div>
-      </Flex>
+      </section>
     </section>
   );
 };
