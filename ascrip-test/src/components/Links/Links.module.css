@@ -13,3 +13,16 @@
 .vertical {
   flex-direction: column;
 }
+.link {
+  text-decoration: none;
+}
+
+.link:hover{
+  font-weight: 500;
+}
+
+.activeLink {
+  font-weight: 600;
+  text-decoration: none;
+
+}
