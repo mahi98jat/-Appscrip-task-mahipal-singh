@@ -17,10 +17,9 @@ const Links: FC<{ layout: "horizontal" | "vertical" }> = ({ layout }) => {
   const isActive = (path: string) => activePathName === path;
 
   const LinkMapper = links.map((val, index) => (
-    <li>
+    <li key={index}>
       <Link
         className={isActive(val?.path) ? styles.link : styles.activeLink}
-        key={index}
         href={val?.path}
       >
         {val?.name}

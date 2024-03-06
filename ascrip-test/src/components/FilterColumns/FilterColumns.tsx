@@ -12,8 +12,8 @@ const FilterColumn: FC<{
 
   return (
     <div className={styles.filterColumn}>
-      {filters.map((filter) => (
-        <FilterSection filter={filter} onFilterSelect={handleCheckboxChange} />
+      {filters.map((filter,index) => (
+        <FilterSection key={index} filter={filter} onFilterSelect={handleCheckboxChange} />
       ))}
     </div>
   );
