@@ -4,7 +4,7 @@ import { Dropdown, FilterColumns, Flex, Product } from "..";
 import React, { FC, useEffect, useState } from "react";
 
 import { ProductType } from "@/resources";
-import {data} from './data';
+import { data } from "./data";
 import styles from "./ProductList.module.css";
 
 async function fetchProducts() {
@@ -12,11 +12,7 @@ async function fetchProducts() {
   return res.json();
 }
 
-  
-
-const ProductList: FC<{
-  // data: ProductType[]
-}> = ({}) => {
+const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
 
   async function getProducts() {
@@ -29,7 +25,7 @@ const ProductList: FC<{
   }, []);
 
   return (
-    <section>
+    <section className={styles.productSection}>
       <Flex justify="flex-end">
         <Dropdown sorts={["a", "b"]} onSelect={() => {}} />
       </Flex>
