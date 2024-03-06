@@ -17,7 +17,7 @@ async function getData() {
 }
 
 export default async function Home() {
-  const data: ProductType[] = await getData();
+  // const data: ProductType[] = await getData();
 
   return (
     <div className={styles.appContainer}>
@@ -25,7 +25,9 @@ export default async function Home() {
         <Header />
       </header>
       <main>
-        <ProductList data={data} />
+        <ProductList 
+        // data={data}
+         />
       </main>
       <footer>
         <Footer />

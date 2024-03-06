@@ -1,0 +1,30 @@
+/* styles/FilterColumn.module.css or similar */
+.filterColumn {
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+  height: 100%;
+  top:0;
+  display: flex;
+  align-items: flex-start;
+  border:5px solid green;;
+}
+
+.filterSection {
+  margin-bottom: 20px;
+}
+
+.filterTitle {
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.filterOptions {
+  margin-left: 10px;
+}
+
+.filterOptions label {
+  display: block;
+  cursor: pointer;
+}

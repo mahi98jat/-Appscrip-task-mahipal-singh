@@ -1,0 +1,7 @@
+.links {
+  display: inline-flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  list-style: none;
+}

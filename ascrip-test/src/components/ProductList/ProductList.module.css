@@ -1,16 +1,12 @@
 .productList {
-  height: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   overflow-y: auto;
+  border: 1px solid red;
 }
 
-@media screen and (max-width:1200px) {
-    .productList{
-        grid-template-columns: repeat(3,1fr);
-    }
-}
+
 
 
 @media screen and (max-width:768px) {

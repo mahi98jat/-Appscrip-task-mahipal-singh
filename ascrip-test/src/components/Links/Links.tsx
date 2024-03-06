@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import styles from './Links.module.css';
 
 const links = [
   { name: "SHOP", path: "/" },
@@ -11,15 +12,15 @@ const links = [
 const Links = () => {
   const LinkMapper = links.map((val, index) => (
     <li>
-      <Link href={val?.path}>
-        <a>{val?.name}</a>
+      <Link key={index} href={val?.path}>
+        {val?.name}
       </Link>
     </li>
   ));
 
   return (
     <nav>
-      <ul>
+      <ul className={styles.links}>
        {LinkMapper}
       </ul>
     </nav>
