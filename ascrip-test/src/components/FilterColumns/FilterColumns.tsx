@@ -36,7 +36,7 @@ const FilterSection: FC<{
         {filter.category}
       </div>
       {isExpand && (
-        <div className={styles.filterOptions}>
+        <div aria-expanded className={styles.filterOptions}>
           {filter.options.map((option) => (
             <label key={option.value}>
               <input
