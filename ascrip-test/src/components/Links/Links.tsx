@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 
 const links = [
   { name: "SHOP", path: "/" },
-  { name: "SKILLS", path: "/product-details" },
-  { name: "STORIES", path: "/product-details" },
-  { name: "ABOUT", path: "/product-details" },
-  { name: "CONTACT US", path: "/product-details" },
+  { name: "SKILLS", path: "/skills" },
+  { name: "STORIES", path: "/stories" },
+  { name: "ABOUT", path: "/about" },
+  { name: "CONTACT US", path: "/contact-us" },
 ];
 const Links: FC<{ layout: "horizontal" | "vertical" }> = ({ layout }) => {
   const activePathName = usePathname();
@@ -19,7 +19,7 @@ const Links: FC<{ layout: "horizontal" | "vertical" }> = ({ layout }) => {
   const LinkMapper = links.map((val, index) => (
     <li key={index}>
       <Link
-        className={isActive(val?.path) ? styles.link : styles.activeLink}
+        className={isActive(val?.path) ? styles.activeLink : styles.link}
         href={val?.path}
       >
         {val?.name}
