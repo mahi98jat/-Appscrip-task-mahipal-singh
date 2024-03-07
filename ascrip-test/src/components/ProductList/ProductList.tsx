@@ -12,19 +12,76 @@ async function fetchProducts() {
   return res.json();
 }
 
+interface ProductStateType {
+  products: ProductType[];
+  wishListed: number[];
+  filters: string[];
+  filteredProducts: ProductType[];
+  sorts: SORTS;
+}
+
+type SORTS = "LOW TO HIGH" | "HIGH TO LOW";
+
+const initialState: ProductStateType = {
+  products: [],
+  wishListed: [],
+  filters: [],
+  filteredProducts: [],
+  sorts: "LOW TO HIGH",
+};
+
 const ProductList: FC = () => {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const width = useWindowWidth();
+
+  const [productValues, setProductValues] =
+    useState<ProductStateType>(initialState);
 
   async function getProducts() {
     const data = await fetchProducts();
-    setProducts(data);
+    setProductValues((prev) => ({
+      ...prev,
+      products: data,
+      filteredProducts: data,
+    }));
+  }
+
+  function handleAddWishList(val: number) {
+    const isPresent = productValues.wishListed.includes(val);
+    if (isPresent) {
+      setProductValues((prev) => ({
+        ...prev,
+        wishListed: [...prev.wishListed.filter((id) => id !== val)],
+      }));
+    } else {
+      setProductValues((prev) => ({
+        ...prev,
+        wishListed: [...prev.wishListed, val],
+      }));
+    }
+  }
+
+  function sortProducts(val: string | SORTS, products: ProductType[]) {
+    if (val === "") {
+      return products;
+    }
+
+    if (val === "HIGH TO LOW") {
+      return products.sort((a, b) => b.price - a.price);
+    }
+
+    return products.sort((a, b) => a.price - b.price);
+  }
+
+  function handleSorting(val: SORTS | string) {
+    setProductValues((prev) => ({
+      ...prev,
+      products: sortProducts(val, prev.products),
+    }));
   }
 
   useEffect(() => {
     getProducts();
   }, []);
-
-  const width = useWindowWidth();
 
   return (
     <section className={styles.productSection}>
@@ -34,16 +91,23 @@ const ProductList: FC = () => {
         }`}
       >
         {width !== 0 && width < 1248 && <FilterWrapper filters={data} />}
-        <Dropdown sorts={["a", "b"]} onSelect={() => {}} />
+        <Dropdown
+          sorts={["LOW TO HIGH", "HIGH TO LOW"]}
+          onSelect={(val) => handleSorting(val)}
+        />
       </Flex>
       <section className={styles.productBody}>
-      {width !== 0 && width >= 1248 && <FilterColumns filters={data} />}
+        {width !== 0 && width >= 1248 && <FilterColumns filters={data} />}
 
-        
         <div style={{ flex: 1 }}>
           <div className={styles.productList}>
-            {products.map((product) => (
-              <Product key={product.id} product={product} />
+            {productValues.products.map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                isWishlisted={productValues.wishListed.includes(product.id)}
+                onAddWishList={handleAddWishList}
+              />
             ))}
           </div>
         </div>
@@ -57,8 +121,10 @@ const FilterWrapper: FC<{ filters: FilterTypes[] }> = ({ filters }) => {
 
   return (
     <div className={styles.filterWrapper}>
-      <div onClick={() => setIsVisible(true)}>show filters</div>
-      <SideDrawer show={isVisible}  onClose={()=>setIsVisible(false)}>
+      <div className={styles.showFilters} onClick={() => setIsVisible(true)}>
+        <span>Show filters</span>
+      </div>
+      <SideDrawer show={isVisible} onClose={() => setIsVisible(false)}>
         <FilterColumns filters={filters} />
       </SideDrawer>
     </div>

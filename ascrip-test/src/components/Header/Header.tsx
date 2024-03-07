@@ -1,5 +1,6 @@
 "use client";
 
+import { BurgerIcon, useWindowWidth } from "@/resources";
 import { Flex, ProductDiscoverySection, SideDrawer } from "..";
 import React, { FC, useState } from "react";
 
@@ -10,7 +11,6 @@ import Logo from "@/resources/Icons/Logo";
 import ProfileIcon from "@/resources/Icons/ProfileIcon";
 import SearchIcon from "@/resources/Icons/SearchIcon";
 import styles from "./Header.module.css";
-import { useWindowWidth } from "@/resources";
 
 const Header: FC = () => {
   const width = useWindowWidth();
@@ -20,7 +20,7 @@ const Header: FC = () => {
       <hgroup className={styles.headerGroup}>
         <Flex justify="space-between">
           <Flex>
-            {width !== 0 && width < 1248 && <LinksWrapper  />}
+            {width !== 0 && width < 1248 && <LinksWrapper />}
             <Logo />
           </Flex>
           <Flex>
@@ -32,7 +32,7 @@ const Header: FC = () => {
         </Flex>
         {width !== 0 && width >= 1248 && (
           <Flex justify="center">
-            <Links layout='horizontal' />
+            <Links layout="horizontal" />
           </Flex>
         )}
       </hgroup>
@@ -46,7 +46,9 @@ const LinksWrapper: FC<{}> = ({}) => {
 
   return (
     <div className={styles.filterWrapper}>
-      <div onClick={() => setIsVisible(true)}>burger</div>
+      <div onClick={() => setIsVisible(true)}>
+        <BurgerIcon />
+      </div>
       <SideDrawer show={isVisible} onClose={() => setIsVisible(false)}>
         <Links layout="vertical" />
       </SideDrawer>
